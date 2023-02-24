@@ -1,34 +1,101 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Layout, Model, TabNode } from 'flexlayout-react';
+import type { IJsonModel } from 'flexlayout-react';
+import './App.css';
+import 'flexlayout-react/style/light.css';
+
+let json : IJsonModel= {
+    global: {"tabEnableFloat": true, "rootOrientationVertical": true, "tabSetMinHeight": 500},
+    borders: [],
+    layout: {
+        type: "row",
+        weight: 100,
+        children: [
+            {
+                type: "row",
+                weight: 100,
+                children: [
+                    {
+                        type: "tabset",
+                        weight: 50,
+                        children: [
+                            {
+                                type: "tab",
+                                name: "Time Series",
+                                component: "button",
+                            }
+                        ]
+                    },
+                ]
+            },
+            {
+                type: "row",
+                weight: 100,
+                children: [
+                    {
+                        type: "tabset",
+                        weight: 50,
+                        children: [
+                            {
+                                type: "tab",
+                                name: "Diversification",
+                                component: "button",
+                            }
+                        ]
+                    },
+                    {
+                        type: "tabset",
+                        weight: 50,
+                        children: [
+                            {
+                                type: "tab",
+                                name: "Details",
+                                component: "button",
+                            },
+                            {
+                                type: "tab",
+                                name: "Watch List",
+                                component: "button",
+                            }
+                        ]
+                    },
+                    {
+                        type: "tabset",
+                        weight: 50,
+                        children: [
+                            {
+                                type: "tab",
+                                name: "Account Summary",
+                                component: "button",
+                            },
+                            {
+                                type: "tab",
+                                name: "Watch List",
+                                component: "button",
+                            }
+                        ]
+                    },
+                ]
+            }
+        ]
+    }
+};
+
+const model = Model.fromJson(json);
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    const factory = (node: TabNode) => {
+        let component = node.getComponent();
+        if (component === "button") {
+            return <button>{node.getName()}</button>;
+        }
+    }
+
+    return (
+        <Layout
+            model={model}
+            factory={factory} />
+    );
 }
 
-export default App
+export default App;

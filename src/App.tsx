@@ -1,88 +1,28 @@
-import { Action, Layout, Model, TabNode } from 'flexlayout-react';
-import type { IJsonModel } from 'flexlayout-react';
-import './App.css';
-import 'flexlayout-react/style/light.css';
+import * as React from 'react'
+import { Action, Layout, Model, TabNode } from 'flexlayout-react'
+import { flexlayout, stocks } from '@/config'
+import type { StocksReference } from '@/config'
 import TimeSeries from '@/components/TimeSeries'
+import useReadCSV from '@/hooks/csvParse'
+import './App.css'
+import 'flexlayout-react/style/light.css'
 
-let json : IJsonModel= {
-    global: {"tabEnableFloat": true, "rootOrientationVertical": true, "tabSetMinHeight": 500},
-    borders: [],
-    layout: {
-        type: "row",
-        weight: 100,
-        children: [
-            {
-                type: "row",
-                weight: 100,
-                children: [
-                    {
-                        type: "tabset",
-                        weight: 50,
-                        children: [
-                            {
-                                type: "tab",
-                                name: "Time Series",
-                                component: "time-series",
-                            }
-                        ]
-                    },
-                ]
-            },
-            {
-                type: "row",
-                weight: 100,
-                children: [
-                    {
-                        type: "tabset",
-                        weight: 50,
-                        children: [
-                            {
-                                type: "tab",
-                                name: "Diversification",
-                                component: "button",
-                            }
-                        ]
-                    },
-                    {
-                        type: "tabset",
-                        weight: 50,
-                        children: [
-                            {
-                                type: "tab",
-                                name: "Details",
-                                component: "button",
-                            },
-                            {
-                                type: "tab",
-                                name: "Watch List",
-                                component: "button",
-                            }
-                        ]
-                    },
-                    {
-                        type: "tabset",
-                        weight: 50,
-                        children: [
-                            {
-                                type: "tab",
-                                name: "Account Summary",
-                                component: "button",
-                            }
-                        ]
-                    },
-                ]
-            }
-        ]
-    }
-};
 
-const model = Model.fromJson(json);
+
+const model = Model.fromJson(flexlayout);
 const handleAction = (action: Action) => {
     window.dispatchEvent(new Event('resize'));
     return action
 }
 
 function App() {
+    const [stockData, setStockData] = React.useState<StocksReference>({})
+    React.useEffect(() => {
+        for (let stock of stocks) {
+            console.log(stock)
+            useReadCSV(stock, stockData, setStockData)
+        }
+    },[])
 
     const factory = (node: TabNode) => {
         let component = node.getComponent();

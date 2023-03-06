@@ -14,7 +14,7 @@ export type StockValues = {
     data: StockData[]
 }
 
-export const stocks = ["AAPL", "MSFT", "FB"] as const
+export const stocks = ["AAPL", "MSFT", "AAL"] as const
 export type Stocks = typeof stocks[number]
 
 export type StocksReference = {

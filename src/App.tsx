@@ -6,7 +6,6 @@ import TimeSeries from '@/components/TimeSeries'
 import useReadCSV from '@/hooks/csvParse'
 import './App.css'
 import 'flexlayout-react/style/light.css'
-import Chart from '@/components/TimeSeries/Chart'
 
 
 const model = Model.fromJson(flexlayout);
@@ -16,14 +15,10 @@ const handleAction = (action: Action) => {
 }
 
 function App() {
-    const [stockData, setStockData] = React.useState<StocksReference>({})
-
+    let [stockData, setStockData] = React.useState<StocksReference>({})
     React.useEffect(() => {
-        for (let stock of stocks) {
-            console.log(stock)
-            useReadCSV(stock, stockData, setStockData)
-        }
-    },[])
+        useReadCSV(setStockData)
+    }, [])
 
     const factory = (node: TabNode) => {
         let component = node.getComponent();

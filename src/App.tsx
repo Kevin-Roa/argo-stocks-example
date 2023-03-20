@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import * as React from 'react'
+import { Action, Layout, Model, TabNode } from 'flexlayout-react'
+import { flexlayout, stocks } from '@/config'
+import type { StocksReference } from '@/config'
+import TimeSeries from '@/components/TimeSeries'
+import useReadCSV from '@/hooks/csvParse'
 import './App.css'
+import 'flexlayout-react/style/light.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+const model = Model.fromJson(flexlayout);
+const handleAction = (action: Action) => {
+    window.dispatchEvent(new Event('resize'));
+    return action
 }
 
-export default App
+function App() {
+    let [stockData, setStockData] = React.useState<StocksReference>({})
+    React.useEffect(() => {
+        useReadCSV(setStockData)
+    }, [])
+
+    const factory = (node: TabNode) => {
+        let component = node.getComponent();
+        if (component === "time-series") {
+            return <TimeSeries data={stockData} />;
+        }
+    }
+
+    return (
+        <Layout
+            model={model}
+            factory={factory}
+            onAction={handleAction} />
+    );
+}
+
+export default App;

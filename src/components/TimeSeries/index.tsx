@@ -1,6 +1,7 @@
 import React from 'react'
+import { Stocks, StocksReference, StockValues } from '@/config'
 import Chart from '@/components/TimeSeries/Chart'
-import { StockData, Stocks, StocksReference, StockValues } from '@/config'
+import StockList from '@/components/TimeSeries/StockList'
 
 interface TimeSeriesProps {
     data: StocksReference
@@ -17,12 +18,12 @@ const TimeSeries = (props: TimeSeriesProps) => {
     })
 
     return (
-        <div className="time-series-wrapper flex flex-row flex-nowrap">
-            <div className="w-3/4">
+        <div className="time-series-wrapper px-10 flex flex-row flex-nowrap">
+            <div className="w-5/6">
                 <Chart data={chartData} />
             </div>
-            <div className="w-1/4">
-                <p>Storybook Card / List Here</p>
+            <div className="w-1/6 flex items-center">
+                <StockList />
             </div>
         </div>
     )

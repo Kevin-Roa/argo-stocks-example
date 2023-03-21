@@ -14,7 +14,7 @@ export type StockValues = {
     data: StockData[]
 }
 
-export const stocks = ["AAPL", "MSFT", "AAL"] as const
+export const stocks = ["AAPL", "MSFT", "AAL", "ABC"] as const
 export type Stocks = typeof stocks[number]
 
 export type StocksReference = {
@@ -56,7 +56,7 @@ export const flexlayout: IJsonModel= {
                             {
                                 type: "tab",
                                 name: "Diversification",
-                                component: "button",
+                                component: "diversification",
                             }
                         ]
                     },

@@ -67,7 +67,7 @@ export const flexlayout: IJsonModel= {
                             {
                                 type: "tab",
                                 name: "Details",
-                                component: "button",
+                                component: "details",
                             },
                             {
                                 type: "tab",

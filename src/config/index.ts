@@ -63,6 +63,7 @@ export const flexlayout: IJsonModel= {
                     {
                         type: "tabset",
                         weight: 50,
+                        width: 825,
                         children: [
                             {
                                 type: "tab",

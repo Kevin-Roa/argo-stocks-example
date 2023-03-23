@@ -8,12 +8,20 @@ const data = {
   "Day's Range": "93.45-95.75",
   "Avg Vol (10-day)": "46.0M",
   "Last (time)": "4:00p ET 02/17/23",
-  "Last (size)": "200"
+  "Last (size)": "200",
+};
+
+const dataTwo = {
+  "Market Cap": "1.2T",
+  "Shares Oustanding": "12.8B",
+  "EPS (TTM, GAAP)": "--",
+  "P/E Ration (TTM, GAAP)": "--x",
+  "Annual Dividend/Yield": "No dividend",
+  "Ex-dividend Date": "No dividend",
 };
 
 function Details(props: any) {
-  //handle props after setting stuff up
-  //{console.log(props.data)}
+  //the data props does not include all of the info on the Figma?
   return (
     <div>
       <AppBar
@@ -27,31 +35,32 @@ function Details(props: any) {
         <Toolbar>
           <Box
             display="flex"
-            gap={5}
+            gap={8}
             sx={{
-              justifyContent: "space-between",
-              // backgroundColor: "red",
+              justifyContent: "space-around",
               width: "100%",
             }}
           >
             <Box display="flex">
-              <Typography variant="h5" component="h5">
+              <Typography variant="h4" component="h4" sx={{fontWeight: "bold"}}>
                 GOOG
               </Typography>
               <Typography
                 ml={1.5}
                 mr={1}
                 mt={1}
-                variant="subtitle1"
-                component="subtitle1"
+                variant="h6"
+                component="h6"
+                sx={{fontWeight: "bold"}}
               >
                 94.59
               </Typography>
               <Typography
-                variant="body2"
-                component="body2"
-                mt={1.5}
+                variant="subtitle1"
+                component="subtitle1"
+                mt={2}
                 color="red"
+                sx={{fontWeight: "bold"}}
               >
                 -1.19 (-1.24%)
               </Typography>
@@ -60,7 +69,7 @@ function Details(props: any) {
             <Box display="flex" gap={3} alignItems="center">
               <Button label="Buy" variant="primary" />
               <Button label="Sell" variant="primary-danger" />
-              <SearchBar variant="contained" className="searchBar" />
+              <SearchBar variant="outlined" className="searchBar" />
             </Box>
           </Box>
         </Toolbar>
@@ -73,13 +82,17 @@ function Details(props: any) {
           flexDirection="column"
           justifyContent="flex-start"
         >
-        {Object.keys(data).map((key) =>
-          <Box display="flex" justifyContent="space-between" mx={4}>
-           <Typography my={1}>{key}</Typography>
-           <Typography my={1}>{data[key]}</Typography>
-         </Box>
-        )}
-          
+          {Object.keys(data).map((key, index) => (
+            <>
+              <Box display="flex" justifyContent="space-between" mx={4}>
+                <Typography my={1}>{key}</Typography>
+                <Typography my={1}>{data[key]}</Typography>
+              </Box>
+              {index != Object.keys(data).length - 1 && (
+                <Divider variant="middle" />
+              )}
+            </>
+          ))}
         </Box>
 
         <Box
@@ -88,40 +101,17 @@ function Details(props: any) {
           flexDirection="column"
           justifyContent="center"
         >
-          <Box display="flex" justifyContent="space-between" mx={4}>
-            <Typography my={1}>Prev Close</Typography>
-            <Typography my={1}>95.78</Typography>
-          </Box>
-          <Divider variant="middle" />
-
-          <Box display="flex" justifyContent="space-between" mx={4}>
-            <Typography my={1}>Prev Close</Typography>
-            <Typography my={1}>95.78</Typography>
-          </Box>
-          <Divider variant="middle" />
-
-          <Box display="flex" justifyContent="space-between" mx={4}>
-            <Typography my={1}>Prev Close</Typography>
-            <Typography my={1}>95.78</Typography>
-          </Box>
-          <Divider variant="middle" />
-
-          <Box display="flex" justifyContent="space-between" mx={4}>
-            <Typography my={1}>Prev Close</Typography>
-            <Typography my={1}>95.78</Typography>
-          </Box>
-          <Divider variant="middle" />
-
-          <Box display="flex" justifyContent="space-between" mx={4}>
-            <Typography my={1}>Prev Close</Typography>
-            <Typography my={1}>95.78</Typography>
-          </Box>
-          <Divider variant="middle" />
-
-          <Box display="flex" justifyContent="space-between" mx={4}>
-            <Typography my={1}>Prev Close</Typography>
-            <Typography my={1}>95.78</Typography>
-          </Box>
+            {Object.keys(dataTwo).map((key, index) => (
+            <>
+              <Box display="flex" justifyContent="space-between" mx={4}>
+                <Typography my={1}>{key}</Typography>
+                <Typography my={1}>{dataTwo[key]}</Typography>
+              </Box>
+              {index != Object.keys(dataTwo).length - 1 && (
+                <Divider variant="middle" />
+              )}
+            </>
+          ))}
         </Box>
       </Box>
     </div>

@@ -21,7 +21,6 @@ const dataTwo = {
 };
 
 function Details(props: any) {
-  //the data props does not include all of the info on the Figma?
   return (
     <div>
       <AppBar

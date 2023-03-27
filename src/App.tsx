@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Action, Layout, Model, TabNode } from 'flexlayout-react'
 import { flexlayout, stocks } from '@/config'
 import type { StocksReference } from '@/config'
-import { TimeSeries, Diversification, Details } from '@/components'
+import { TimeSeries, Diversification, Details, AccountSummary } from '@/components'
 import useReadCSV from '@/hooks/csvParse'
 import './App.css'
 import 'flexlayout-react/style/light.css'
@@ -23,14 +23,15 @@ function App() {
     const factory = (node: TabNode) => {
         let component = node.getComponent();
 
-        if (component === "time-series") {
-            return <TimeSeries data={stockData} />;
-        }
-        if (component === "diversification") {
-            return <Diversification data={stockData} />;
-        }
-        if(component === "details") {
-            return <Details data={stockData}/>
+        switch (component) {
+            case "time-series":
+                return <TimeSeries data={stockData} />
+            case "diversification":
+                return <Diversification data={stockData} />
+            case "details":
+                return <Details data={stockData}/>
+            case "accountsummary":
+                return <AccountSummary />
         }
     }
 

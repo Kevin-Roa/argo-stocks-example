@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Action, Layout, Model, TabNode } from 'flexlayout-react'
 import { flexlayout, stocks } from '@/config'
 import type { StocksReference } from '@/config'
-import { TimeSeries, Diversification } from '@/components'
+import { TimeSeries, Diversification, Details } from '@/components'
 import useReadCSV from '@/hooks/csvParse'
 import './App.css'
 import 'flexlayout-react/style/light.css'
@@ -28,6 +28,9 @@ function App() {
         }
         if (component === "diversification") {
             return <Diversification data={stockData} />;
+        }
+        if(component === "details") {
+            return <Details data={stockData}/>
         }
     }
 

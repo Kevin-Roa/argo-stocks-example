@@ -3,6 +3,7 @@ import { Action, Layout, Model, TabNode } from 'flexlayout-react'
 import { flexlayout, stocks } from '@/config'
 import type { StocksReference } from '@/config'
 import { TimeSeries, Diversification, Details, AccountSummary } from '@/components'
+import { Header } from '@utd-argo/ux-master-library'
 import useReadCSV from '@/hooks/csvParse'
 import './App.css'
 import 'flexlayout-react/style/light.css'
@@ -36,10 +37,15 @@ function App() {
     }
 
     return (
-        <Layout
-            model={model}
-            factory={factory}
-            onAction={handleAction} />
+        <>
+            <Header variant="global" title="Stocks" />
+            <div className="relative h-[130%]">
+                <Layout
+                    model={model}
+                    factory={factory}
+                    onAction={handleAction} />
+            </div>
+        </>
     );
 }
 

@@ -29,7 +29,6 @@ const Diversification = (props: DiversificationProps) => {
         chartData[key] = slices[index]
     })
 
-    console.log(chartData)
     return (
         <div className="diversification-wrapper">
             <Chart data={chartData} />

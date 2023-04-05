@@ -73,7 +73,7 @@ export const flexlayout: IJsonModel= {
                             {
                                 type: "tab",
                                 name: "Watch List",
-                                component: "button",
+                                component: "watch-list",
                             }
                         ]
                     },

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Action, Layout, Model, TabNode } from 'flexlayout-react'
 import { flexlayout, stocks } from '@/config'
 import type { StocksReference } from '@/config'
-import { TimeSeries, Diversification, Details, AccountSummary, WatchList } from '@/components'
+import { TimeSeries, Diversification, Details, AccountSummary, WatchList, Positions } from '@/components'
 import { Header } from '@utd-argo/ux-master-library'
 import useReadCSV from '@/hooks/csvParse'
 import './App.css'
@@ -30,18 +30,22 @@ function App() {
             case "diversification":
                 return <Diversification data={stockData} />
             case "details":
-                return <Details data={stockData}/>
-            case "accountsummary":
+                return <Details data={stockData} />
+            case "account-summary":
                 return <AccountSummary />
             case "watch-list":
-                return <WatchList data={stockData}/>
+                return <WatchList data={stockData} />
+            case "positions":
+                return <Positions data={stockData} />
         }
     }
 
     return (
         <>
-            <Header variant="global" title="Stocks" />
-            <div className="relative h-[130%]">
+            <div className="relative">
+                <Header variant="global" title="Stocks" />
+            </div>
+            <div className="relative h-[110%]">
                 <Layout
                     model={model}
                     factory={factory}

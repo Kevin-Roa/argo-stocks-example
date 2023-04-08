@@ -20,7 +20,7 @@ const dataTwo = {
 	'Ex-dividend Date': 'No dividend'
 } as { [key: string]: string };
 
-function Details(props: any) {
+function Index(props: any) {
 	return (
 		<div>
 			<AppBar
@@ -120,4 +120,4 @@ function Details(props: any) {
 	);
 }
 
-export default Details;
+export default Index;

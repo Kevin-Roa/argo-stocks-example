@@ -15,6 +15,7 @@ export type StockValues = {
 }
 
 export const stocks = ["AAPL", "MSFT", "AAL", "ABC"] as const
+export const slices = [9, 3, 7, 1] as const;
 export type Stocks = typeof stocks[number]
 
 export type StocksReference = {
